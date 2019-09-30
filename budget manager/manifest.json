@@ -1,0 +1,19 @@
+{
+    "manifest_version":2,
+    "version":"1.0.1",
+    "name":"Budget manager",
+    "description":"this tracks your overall spendings",
+    "icons":{
+        "16":"/logo/16.png",
+        "48":"/logo/48.png",
+        "128":"/logo/128.png"
+    },
+    "browser_action":{
+        "default_icon":"/logo/16.png",
+        "default_popup":"popup.html"
+    },
+    "permissions":[
+        "storage"
+    ]
+    
+}
