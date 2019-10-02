@@ -12,8 +12,15 @@
         "default_icon":"/logo/16.png",
         "default_popup":"popup.html"
     },
+    "background" : {
+        "scripts":["js/eventPage.js"],
+        "persistent":false
+    },
+    "options_page":"options.html",
     "permissions":[
-        "storage"
+        "storage",
+        "notifications",
+        "contextMenus"
     ]
     
 }

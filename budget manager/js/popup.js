@@ -1,10 +1,11 @@
 
 $(document).ready(function(){
-    chrome.storage.sync.get('total',function(budget){
+    chrome.storage.sync.get(['total','limit'],function(budget){
         $('#total').text(budget.total);
+        $('#limit').text(budget.limit);
     });
     $('#spendamount').click(function(){
-        chrome.storage.sync.get('total',function(budget){
+        chrome.storage.sync.get(['total','limit'],function(budget){
             var newTotal=0;
             if(budget.total){
                 newTotal+=parseInt(budget.total);
@@ -13,9 +14,20 @@ $(document).ready(function(){
             if(amount){
                 newTotal+=parseInt(amount);
             }    
-            chrome.storage.sync.set({'total':newTotal});
+            chrome.storage.sync.set({'total':newTotal},function(){
+           if(amount && newTotal>=budget.limit){
+               var notifoflimit = {
+                   type: 'basic',
+                   iconUrl: '/logo/48.png',
+                   title: 'Limit reached !',
+                   message:'uh oh ! looks like you have reached your limit' 
+               };
+            chrome.notifications.create('limitNotif',notifoflimit);
+           }
+        });
             $('#total').text(newTotal);
             $('#amount').val('');
+            
         });
 
     });
@@ -25,5 +37,6 @@ $(document).ready(function(){
             $('#total').text(0);
             $('#amount').val('');
         });
+   
 
 });
